@@ -1,0 +1,23 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "semi": [
+            2,
+            "never"
+        ],
+        "quotes": [
+            2,
+            "double"
+        ],
+        "indent": [
+            2,
+            4
+        ]
+    }
+}
