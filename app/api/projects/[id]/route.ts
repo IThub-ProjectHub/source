@@ -8,12 +8,12 @@ type params = {
 
 export async function GET(_req: Request, { params }: params) {
     try {
-        const data = await prisma.user.findUnique({
+        const data = await prisma.project.findUnique({
             where: {
                 id: params.id
             },
             include: {
-                project: true
+                members: true
             }
         })
         return Response.json({ data }, {

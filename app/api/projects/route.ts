@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma"
+import { Client, Industry } from "@prisma/client"
 
 export async function GET() {
     try {
@@ -18,24 +19,33 @@ export async function GET() {
     }
 }
 
-// export async function POST(req: Request) {
-//     try {
-//         const { name, email }: {
-//             name: string
-//             email: string
-//         } = await req.json()
-//         const res = await prisma.user.create({
-//             data: {
-//                 name,
-//                 email,
-//                 role: "none"
-//             }
-//         })
-//         return Response.json(res)
-//     } catch (error) {
-//         const err = error as Error
-//         return Response.json({ message: err.message }, {
-//             status: 500
-//         })
-//     }
-// }
+export async function POST(req: Request) {
+    try {
+        const { name, description, client, industry, userId }: {
+            name: string
+            description: string
+            client: Client
+            industry: Industry
+            userId: string
+        } = await req.json()
+        const res = await prisma.project.create({
+            data: {
+                name,
+                description,
+                client,
+                industry,
+                members: {
+                    connect: {
+                        id: userId
+                    }
+                }
+            }
+        })
+        return Response.json(res)
+    } catch (error) {
+        const err = error as Error
+        return Response.json({ message: err.message }, {
+            status: 500
+        })
+    }
+}

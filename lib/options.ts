@@ -13,18 +13,6 @@ export const authOptions: NextAuthOptions = {
                     type: "email",
                     label: "Email"
                 },
-                name: {
-                    type: "text",
-                    label: "Name"
-                },
-                surname: {
-                    type: "text",
-                    label: "Name"
-                },
-                patronymic: {
-                    type: "text",
-                    label: "Name"
-                },
                 password: {
                     type: "password",
                     label: "Password"
@@ -71,6 +59,9 @@ export const authOptions: NextAuthOptions = {
 
             return token
         }
+    },
+    pages: {
+        signIn: "/auth/login"
     }
 }
 

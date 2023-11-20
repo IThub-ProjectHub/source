@@ -1,6 +1,12 @@
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('none', 'member', 'creator');
 
+-- CreateEnum
+CREATE TYPE "Client" AS ENUM ('B2B', 'B2C', 'B2G');
+
+-- CreateEnum
+CREATE TYPE "Industry" AS ENUM ('IThubClub');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
@@ -21,6 +27,9 @@ CREATE TABLE "Project" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "client" "Client" NOT NULL,
+    "industry" "Industry" NOT NULL,
 
     CONSTRAINT "Project_pkey" PRIMARY KEY ("id")
 );
