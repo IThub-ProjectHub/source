@@ -8,6 +8,16 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            backgroundColor: {
+                "main": "#242424",
+                "elements": "#C292FF"
+            },
+            textColor: {
+                "elements": "#C292FF"
+            },
+            borderColor: {
+                "elements": "#C292FF"
+            }
         },
     },
     plugins: [],
