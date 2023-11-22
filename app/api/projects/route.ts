@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { Client, Industry } from "@prisma/client"
+import { getSession } from "next-auth/react"
 
 export async function GET() {
     try {
@@ -20,6 +21,11 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+    const session = await getSession()
+
+    // if (!session)
+    //     return Response.json({ message: "Unauthorized" })
+
     try {
         const { name, description, client, industry, userId }: {
             name: string
@@ -28,6 +34,20 @@ export async function POST(req: Request) {
             industry: Industry
             userId: string
         } = await req.json()
+
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId
+            }
+        })
+
+        if (user?.role != "none")
+            return Response.json({
+                message: "User already in Project"
+            }, {
+                status: 405
+            })
+
         const res = await prisma.project.create({
             data: {
                 name,
@@ -41,6 +61,16 @@ export async function POST(req: Request) {
                 }
             }
         })
+
+        await prisma.user.update({
+            where: {
+                id: userId
+            },
+            data: {
+                role: "creator"
+            }
+        })
+
         return Response.json(res)
     } catch (error) {
         const err = error as Error
