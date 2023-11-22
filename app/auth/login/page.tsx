@@ -34,7 +34,7 @@ const Login = (props: Props) => {
     }
     return (
         <div className="">
-            {error && <p className="bg-red-700 border-[2px] border-red-900 py-2 px-4">
+            {error && <p className="bg-red-700 border-[2px] border-red-900 py-2 px-4 absolute top-0 left-0 w-full">
                 {error == "CredentialsSignin"
                     ? "Неверный логин или пароль"
                     : "Ошибка на сервере, попробуйте позже"

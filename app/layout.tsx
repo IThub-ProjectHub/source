@@ -10,7 +10,7 @@ const RootLayout = ({
 }) => {
     return (
         <html lang="ru" className="bg-main w-full h-screen text-white">
-            <body className={inter.className}>
+            <body className={`${inter.className} h-full`}>
                 {children}
             </body>
         </html>

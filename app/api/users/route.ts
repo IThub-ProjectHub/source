@@ -48,7 +48,11 @@ export async function POST(req: Request) {
         return Response.json(res)
     } catch (error) {
         const err = error as Error
-        return Response.json({ message: err.message }, {
+
+        return Response.json({
+            message: err.message,
+            name: err.name
+        }, {
             status: 500
         })
     }
